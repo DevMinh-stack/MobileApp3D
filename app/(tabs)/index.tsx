@@ -1,10 +1,12 @@
-import { fetchAllItems } from "@/app/service/itemService";
 import CategoryCard from "@/components/CategoriesCard";
 import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+
+import { fetchAllItems } from "@/app/service/itemService";
+
+import { Image, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   const [items, setItems] = useState<any[]>([]);
@@ -27,33 +29,21 @@ export default function Index() {
 
     loadItems();
   }, []);
-
-  if (loading) {
-    return (
-      <View className="flex-1 bg-primary items-center justify-center">
-        <ActivityIndicator size="large" color="#fff" />
-        <Text className="text-white mt-3">Loading items...</Text>
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View className="flex-1 bg-primary items-center justify-center">
-        <Text className="text-red-400">Failed to load items: {error}</Text>
-      </View>
-    );
-  }
-
+  const categories = [
+    { id: 1, title: "FURNITURE", image: images.hansrobot },
+    { id: 2, title: "TOYS", image: images.hubspot },
+    { id: 3, title: "SPORTS", image: images.yamaha },
+    { id: 4, title: "BABY + KIDS", image: images.hansrobot },
+    { id: 5, title: "ELECTRONICS", image: images.hubspot },
+    { id: 6, title: "HOBBIES", image: images.yamaha },
+  ]
   return (
-    <View className="flex-1 bg-primary">
+    <View
+      className="flex-1 bg-primary">
       <Image source={images.bg} className="absolute w-full h-full" />
 
-      <ScrollView
-        className="flex-1 px-5"
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
-      >
+      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}>
         {/* Logo */}
         <Image source={icons.logoInservio} className="w-14 h-14 mt-20 mb-4 mx-auto" />
 
@@ -66,7 +56,7 @@ export default function Index() {
         </Text>
 
         <View className="flex-row flex-wrap justify-between">
-          {items.map((item) => (
+          {categories.map((cat) => (
             <CategoryCard
               key={cat.id}
               title={cat.title}
@@ -75,7 +65,11 @@ export default function Index() {
             />
           ))}
         </View>
+
       </ScrollView>
+
+
+
     </View>
   );
 }
