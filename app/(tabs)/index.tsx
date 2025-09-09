@@ -57,23 +57,21 @@ export default function Index() {
         {/* Logo */}
         <Image source={icons.logoInservio} className="w-14 h-14 mt-20 mb-4 mx-auto" />
 
-        <View className="flex-1 mt-5">
-          {/* Search */}
-          <SearchBar />
-        </View>
+        {/* Search */}
+        <SearchBar />
 
-        {/* Categories từ API */}
-        <Text className="text-lg font-bold text-white mt-8 mb-4">
+        {/* Categories */}
+        <Text className="text-lg font-bold text-white mt-4 mb-4">
           BROWSE BY CATEGORIES
         </Text>
 
         <View className="flex-row flex-wrap justify-between">
           {items.map((item) => (
             <CategoryCard
-              key={item.id}
-              title={item.name}
-              imagaes={{ uri: item.image || "https://via.placeholder.com/150" }}
-              onPress={() => console.log("Go to", item.name)}
+              key={cat.id}
+              title={cat.title}
+              images={cat.image}
+              onPress={() => console.log("Go to", cat.title)}
             />
           ))}
         </View>
